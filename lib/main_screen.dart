@@ -1,6 +1,7 @@
 import 'package:bab3/model/tourism_place.dart';
 import 'package:bab3/tourism_list.dart';
 import 'package:flutter/material.dart';
+import 'add_tourism_place.dart';
 import 'done_tourism_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -30,6 +31,17 @@ class _MainScreenState extends State<MainScreen>{
         ],
       ),
       body: TourismList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context){
+              return const AddTourismPlace();
+            }),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:bab3/provider/done_tourism_provider.dart';
+import 'package:bab3/screen/halaman.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Wisata Kota Sumenep',
         theme: ThemeData(),
-        home: MainScreen(),
+        home: Halaman(),
       ),
     );
   }
