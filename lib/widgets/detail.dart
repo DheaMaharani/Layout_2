@@ -1,15 +1,38 @@
+import 'dart:convert';
 import 'package:bab3/model/tourism_place_model.dart';
+import 'package:bab3/screen/halaman.dart';
+import 'package:bab3/screen/halaman_edit.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 class Detail extends StatelessWidget {
   const Detail({Key? key, required this.data}) : super(key: key);
 
   final Datum data;
 
+  Future hapusWisata(String wisataId) async {
+    String _url = "https://625a05cb43fda1299a14aa37.mockapi.io/api/v1/tourism-places/" + wisataId;
+    var response = await http.delete(Uri.parse(_url));
+
+    return json.decode(response.body);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Daftar Wisata'),
+        actions: <Widget>[
+          IconButton(
+              onPressed: () async {
+                hapusWisata(data.id.toString()).then((value) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Halaman()));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Wisata berhasil dihapus"),
+                      ));
+                });
+              },
+              icon: Icon(Icons.delete))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -102,6 +125,13 @@ class Detail extends StatelessWidget {
             ),//Container for Photos
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.edit),
+        onPressed: () async {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EditWisata(data: data)));
+        },
       ),
     );
   }

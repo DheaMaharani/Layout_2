@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen>{
           ),
         ],
       ),
-      body: TourismList(),
+      //body: TourismList(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(
